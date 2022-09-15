@@ -14,16 +14,19 @@ public class AddressServiceTest {
     @Autowired
     private AddressService addressSvc;
 
-    
     @Test
     void insertNewContact(){
         Contacts contact = new Contacts();
-        contact.setId("1234566789");
+        contact.setId("12345678");
         contact.setName("leslie");
         contact.setEmail("leslie@gmail.com");
         contact.setMobile(93847622);
 
         addressSvc.addContact(contact);
+    }
 
+    @Test
+    void getAllContacts(){
+        System.out.println(addressSvc.getContactList().toString());
     }
 }

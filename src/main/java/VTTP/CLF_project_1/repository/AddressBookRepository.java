@@ -1,11 +1,17 @@
 package VTTP.CLF_project_1.repository;
 
+
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
+
+import VTTP.CLF_project_1.mapper.AddressBookRowMapper;
+import VTTP.CLF_project_1.model.Contacts;
 
 @Repository
 public class AddressBookRepository {
@@ -40,5 +46,9 @@ public class AddressBookRepository {
 
         return Optional.of(result.getInt("mobile"));
     }
+
+    public List<Contacts> getContactList (){
+        return template.query("select * from address_book", new AddressBookRowMapper());
+    } 
 
 }

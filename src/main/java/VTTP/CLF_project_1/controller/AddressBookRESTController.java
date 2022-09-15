@@ -1,15 +1,15 @@
 package VTTP.CLF_project_1.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,7 +34,6 @@ public class AddressBookRESTController {
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> postContacts (@RequestBody String payload){
         logger.info("payload: %s".formatted(payload));
-       
 
         try {
             newContact = Contacts.create(payload);
@@ -51,6 +50,14 @@ public class AddressBookRESTController {
         resp.setMessage(newContact.getId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(gson.toJson(resp));
+    }
+
+    @GetMapping(path = "/getContacts")
+    public ResponseEntity<List<Contacts>> getContactLists(){
+        List <Contacts> contactList;
+        contactList = contactSvc.getContactList();
+
+        return ResponseEntity.accepted().body(contactList);
     }
     
 }

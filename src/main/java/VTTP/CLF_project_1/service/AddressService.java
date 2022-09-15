@@ -1,5 +1,6 @@
 package VTTP.CLF_project_1.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,6 +30,10 @@ public class AddressService {
 
     public Optional<Integer> checkDuplicateMobile (Contacts contact){
         return addressBookRepo.getContactByMobile(contact.getMobile());
+    }
+
+    public List<Contacts> getContactList (){
+        return addressBookRepo.getContactList();
     }
 
 }
